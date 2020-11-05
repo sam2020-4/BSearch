@@ -1,7 +1,6 @@
 from django.conf.urls import url
-from tutorial.users import views as tutorial_views
+from BSproject.users import views as BSproject_views
 
-urlpatterns = [
-    
-    url(r'^signup/$', neighbour_views.signup, name='signup'),
+urlpatterns = [    
+    url(r'^signup/$', BSproject_views.signup, name='signup'),
 ]
