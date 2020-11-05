@@ -95,13 +95,13 @@ def user_profiles(request):
     
     if request.method == 'POST':
         form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
-        form2 = NewNeighborhoodForm(request.POST)
+        form2 = NewCountyForm(request.POST)
         
         if form2.is_valid():
-            neighborhood = form2.save(commit=False)
-            neighborhood.Admin = current_user
-            neighborhood.admin_profile = profile
-            neighborhood.save()
+            county = form2.save(commit=False)
+            county.Admin = current_user
+            county.admin_profile = profile
+            county.save()
             return redirect('profile')
         
         if form.is_valid():
@@ -111,6 +111,6 @@ def user_profiles(request):
             
     else:
         form = ProfileUpdateForm()
-        form2 = NewNeighborhoodForm()
+        form2 = NewCountyForm()
 
     return render(request, 'registration/profile.html', {"form":form, "form2":form2})
