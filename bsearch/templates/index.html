@@ -1,1 +1,115 @@
-<h1>hello kenya</h1>
+{%extends 'base.html' %}
+
+{% block content %}
+{% if user.is_authenticated %}
+{{block.super}}
+<div class="container-fluid" style="height: 100%;">
+  <div class="row align-items-center">
+    <div class="col-lg-12 pr-1 pl-1">
+        <div class="container pt-2 mt-2">
+            <p class="font-weight-bold">Select County you want here:</p>
+            
+          <form class="" action="{% url 'index' %}" method="get">
+
+            <!-- Grid row -->
+          <div class="row">
+              <!-- Grid column -->
+              <div class="col">
+                <!-- Default input -->
+                <select name="county" class="form-control  form-control-lg">
+                    {% for neighborhood in all_neighborhoods %}
+                    <option value="{{county.name}}">{{county.name}}</option>
+                    {% endfor %}
+                  </select>     
+              </div>
+              <!-- Grid column -->
+          
+              <!-- Grid column -->
+              <div class="col">
+                <!-- Default input -->
+                <button type = "submit" class="btn btn-info">Find by county</button>
+              </div>
+              <!-- Grid column -->
+            </div>
+            <!-- Grid row -->
+          </form>
+
+        </div>
+
+        <div class="container pt-4 mt-2 mb-4 pb-4">
+          {% if location %}
+              <!-- start of table  --> 
+            <div class="table-responsive">
+                <table id="dtBasicExample" class="table table-striped" cellspacing="0">
+                  <thead class="grey black-text">
+                    <tr class="font-weight-bold">
+                      <th class="th-sm">Donor Name</th>
+                      <th class="th-sm">Blood Group</th>
+                      <th class="th-sm">Gender</th>
+                      <th class="th-sm">Age</th>
+                      <th class="th-sm">Donor Contacts</th> 
+                      <th class="th-sm">Donor Address</th>
+                      <th class="th-sm">Donor Email</th>
+                      <th class="th-sm">Location</th>
+                      <th class="th-sm">County Name</th>
+                                           
+                    </tr>
+                  </thead>
+                  <tbody>
+                      {% for Business in location%}
+                    <tr>
+                      <td>{{Business.name}}</td>
+                      <td>{{Business.address}}</td>
+                      <td>{{Business.email}}</td>
+                      <td>{{Business.neighborhood.name}}</td>
+                      <td>{{Business.police_cont}}</td>
+                      <td>{{Business.health_cont}}</td>                      
+                    </tr>
+              {% endfor %}                    
+                  </tbody>
+                  
+                </table>
+            </div>
+              <!-- end of table  -->
+
+              {% else %}
+              <p>Nothing found. Find by County then Hit the Search Button.</p>
+            
+          {% endif %}
+
+        </div>
+      </div>      
+  
+    </div>
+</div>
+{% else %}
+
+<!-- landing page -->
+<div style="background:linear-gradient(rgba(146, 147, 153, 0.52), rgba(46, 39, 44, 0.73)),url('../../collections/gREENpARK-kAREN.jpg'); height: 50%; background-size: cover; background-position: center;"> 
+  <div class="landing" id="first">          
+    <div class="rgba-black-light full-bg-img flex-center mask white-text" style="height: 78vh;">           
+
+        <ul class="animated fadeInUp col-md-12 list-unstyled list-inline">
+            <li>
+              <h3 class="display-4 font-weight-bold white-text pt-3 animate__animated animate__fadeInLeft">BSearch, Save Life Connect System!!!</h3>
+            </li>
+            <li>
+            <p class="font-weight-bold text-uppercase py-4">Connecting blood donors with recipients all over the counties in kenya</p>
+            <p class="font-weight-bold text-uppercase py-4">Find blood donors near your location and make a blood request in less than 5 minutes.</p>
+            </li>
+            <li class="list-inline-item">
+            <a target="_blank" href="/accounts/login" class="btn btn-outline-secondary mr-0">Login!</a>
+            </li>
+            <li class="list-inline-item">
+            <a target="_blank" href="accounts/register" class="btn btn-info white-text ml-0">Sign Up</a>
+            </li>
+        </ul>                  
+    </div> 
+  </div>
+</div>
+
+
+{% endif %}
+<!-- end of landing page -->
+
+{% endblock %}

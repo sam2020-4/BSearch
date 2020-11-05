@@ -15,6 +15,7 @@ import cloudinary
 import cloudinary.uploader
 import cloudinary.api
 import dj_database_url
+import django_heroku
 from decouple import config,Csv
 
 
@@ -67,8 +68,8 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
-INSTALLED_APPS = [
-    'bsearch',
+INSTALLED_APPS = [   
+    'bsearch',    
     'bootstrap4',
     'cloudinary',  
     'crispy_forms',
@@ -180,7 +181,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 # Configure Django App for Heroku.
-# django_heroku.settings(locals())
+django_heroku.settings(locals())
 
 # cloudinary
 cloudinary.config( 
