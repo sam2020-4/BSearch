@@ -80,10 +80,10 @@ def new_donor(request):
     if request.method == 'POST':
         form = NewDonorForm(request.POST, request.FILES)
         if form.is_valid():
-            project = form.save(commit=False)
-            project.Admin = current_user
-            project.admin_profile = profile
-            project.save()
+            donor = form.save(commit=False)
+            donor.Admin = current_user
+            donor.admin_profile = profile
+            donor.save()
         return redirect('index')
 
     else:

@@ -69,7 +69,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [   
-    
+    'rest_framework',
     'bsearch',    
     'bootstrap4',
     'cloudinary',  

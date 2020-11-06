@@ -3,12 +3,12 @@
 {% load bootstrap4 %}
 
 {% block content %}
-<div class="container">
+<div class="container-fluid" style="background:linear-gradient(rgba(146, 147, 153, 0.52), rgba(46, 39, 44, 0.73)),url('../../../media/8.webp'); height: 100%; background-size: cover; background-position: center;"> 
     <div class="row">
         <!-- Empty div -->
         <div class="col-lg-4"></div>
 
-        <div class="col-lg-4 mt-4 pt-2 " style="height: 60vh;">
+        <div class="col-lg-4 mt-4 pt-4 text-white" style="height: 70vh;">
             {% if form.errors %}
                 <p> Password or Username is incorrect, Please Try Again!!</p>
             {% endif %}
