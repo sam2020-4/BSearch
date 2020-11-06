@@ -7,7 +7,7 @@ urlpatterns = [
     url(r'^$', views.index, name= 'index'),
     url(r'^search/', views.search_donors, name='search_results'),
     url(r'^donor/(\d+)', views.get_donor, name='donor_results'),
-    url(r'^new/donor$', views.new_donor, name='new-donor'),    
+    url(r'^new/donor/$', views.new_donor, name='new-donor'),    
     url(r'^accounts/profile/$', views.user_profiles, name='profile'),
 ]
 

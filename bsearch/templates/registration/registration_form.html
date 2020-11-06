@@ -2,12 +2,12 @@
 {% load bootstrap4 %}
 
 {% block content %}
-<div class="container">
+<div class="container-fluid pb-5" style="background:linear-gradient(rgba(146, 147, 153, 0.52), rgba(46, 39, 44, 0.73)),url('../../../media/8.webp'); height: 100%; background-size: cover; background-position: center;"> 
     <div class="row">
-        <!-- Empty div -->
-        <div class="col-lg-3"></div>
+        
+        <div class="col-lg-4"></div>
 
-        <div class="col-lg-6 pt-2 mt-4">
+        <div class="col-lg-4 pt-2 pb-2 mt-4 text-white">
             {% if messages %}
             {% for message in messages %}
             <div class="alert alert-{{message.tags}}">
@@ -40,10 +40,10 @@
 
             </div>
             <small>Already a member? <a href="/accounts/login">Login Here!</a></small>
-        </div>
-        
-        <!-- empty div -->
-        <div class="col-lg-3"></div>
+        </div>    
+        <br> <br> <br> <br>    
+       
+        <div class="col-lg-4"></div>
     </div>
 </div>
 {% endblock %}

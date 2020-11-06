@@ -101,12 +101,12 @@ class Donor(models.Model):
         return donor
     
     @classmethod
-    def get_by_donor(cls, donors):
+    def get_by_county(cls, countys):
         donor = cls.objects.filter(county__name__icontains=countys)
         return donor
     
     @classmethod
-    def get_donor(request, id):
+    def get_donors(request, id):
         try:
             donor = Donor.objects.get(pk = id)
             

@@ -29,6 +29,22 @@ def index(request):
 
     return render(request, 'index.html', {"date": date, "all_countys":all_countys,})
 
+
+# register method
+def register(request):
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            messages.success(request, f'Account created for {username}')
+            return redirect('/accounts/login')
+        
+    else:
+        form = RegisterForm()
+    return render(request, 'registration/registration_form.html', {'form':form})
+
+
 # search method for business    
 @login_required(login_url='/accounts/login/')
 def search_donors(request):
@@ -37,7 +53,7 @@ def search_donors(request):
         searched_projects = Donor.search_donor(search_term)
         message = f"{search_term}"
 
-        return render(request, 'search.html', {"message":message,"businesses": searched_projects})
+        return render(request, 'search.html', {"message":message,"donors": searched_projects})
 
     else:
         message = "You haven't searched for any term"
@@ -58,7 +74,8 @@ def get_donor(request, id):
 @login_required(login_url='/accounts/login/')
 def new_donor(request):
     current_user = request.user
-    profile = request.user.profile
+    # profile = request.user.profile
+    profile = Profile.objects.get_or_create(user=request.user)
 
     if request.method == 'POST':
         form = NewDonorForm(request.POST, request.FILES)
@@ -73,26 +90,12 @@ def new_donor(request):
         form = NewDonorForm()
     return render(request, 'new-donor.html', {"form": form})
 
-# register method
-def register(request):
-    if request.method == 'POST':
-        form = RegisterForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            messages.success(request, f'Account created for {username}')
-            return redirect('/')
-        
-    else:
-        form = RegisterForm()
-    return render(request, 'registration/registration_form.html', {'form':form})
-
 # user profiles method
 @login_required(login_url='/accounts/login/')
 def user_profiles(request):
     current_user = request.user
-    profile = request.user.profile
-    
+    profile = Profile.objects.get_or_create(user=request.user)
+
     if request.method == 'POST':
         form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
         form2 = NewCountyForm(request.POST)
@@ -114,3 +117,25 @@ def user_profiles(request):
         form2 = NewCountyForm()
 
     return render(request, 'registration/profile.html', {"form":form, "form2":form2})
+
+
+
+# def new_profile(request):
+#     current_user = request.user
+
+#     if request.method == 'POST':
+#         form = ProfileUpdateForm(request.POST,request.FILES)
+
+#         if form.is_valid():
+#             profile = form.save(commit=False)
+#             profile.name = current_user
+#             profile.save()
+
+#         return redirect('profile')
+
+#     else:
+#         form= ProfileUpdateForm()
+
+#     return render(request, 'registration/profile.html', {'form':form})
+
+

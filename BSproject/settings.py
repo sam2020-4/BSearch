@@ -69,6 +69,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [   
+    
     'bsearch',    
     'bootstrap4',
     'cloudinary',  

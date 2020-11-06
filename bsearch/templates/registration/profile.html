@@ -4,8 +4,7 @@
 
 {% block content %}
 <div class="container-fluid mb-4 pb-4" style="height: 100%;">
-    <div class="row">
-        <!-- Empty div -->
+    <div class="row">        
         <div class="col-lg-2"></div>
 
         <div class="col-lg-8 mt-4 pt-2 ">
@@ -21,7 +20,7 @@
                 <p> <span class="font-weight-bold"> County:</span> {{ user.profile.county.name}}  </p>
                 <p> <span class="font-weight-bold"> Location:</span> {{ user.profile.county.location}}</p>               
                 <button class="btn btn-md btn-outline-info font-weight-bold" data-toggle="modal" data-target="#profile"> Edit Profile</button>
-                <button class="btn btn-md btn-outline-info font-weight-bold" data-toggle="modal" data-target="#neighborhood"> Add County</button>
+                <button class="btn btn-md btn-outline-info font-weight-bold" data-toggle="modal" data-target="#county"> Add County</button>
             </div>
 
             <hr>           
@@ -46,9 +45,9 @@
               
                  <div>
                   <!-- profile update form  -->
-                        <h4 class="font-weight-bold">Update Your Profile</h4>
-                        <hr class="">
-                        <form  method="post" enctype="multipart/form-data">
+                    <h4 class="font-weight-bold">Update Your Profile</h4>
+                    <hr class="">
+                    <form  method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         {% bootstrap_form form%}
 
@@ -90,7 +89,7 @@
                         {% bootstrap_form form2 %}
 
                         <div class="form-group">
-                            <button type="submit" class="btn cyan btn-lg mt-2 font-weight-bold btn-block"> Add Neighborhood </button>
+                            <button type="submit" class="btn cyan btn-lg mt-2 font-weight-bold btn-block">Add County</button>
                         </div>
                         <input type="hidden" name="next" value="{{next}}">
                     </form>
