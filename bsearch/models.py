@@ -74,8 +74,8 @@ class Profile(models.Model):
        
 class Donor(models.Model):
     name = models.CharField(max_length=255)
-    bloodg_type = models.CharField(max_length=20)
-    gender = models.CharField(max_length=20)
+    blood_group = models.CharField(max_length=20,blank=True, null=True)
+    gender = models.CharField(max_length=20,blank=True, null=True)
     age = models.IntegerField(blank=True, null=True)
     mobile_no = models.IntegerField(blank=True, null=True)
     email = models.EmailField()
@@ -97,8 +97,8 @@ class Donor(models.Model):
     
     @classmethod
     def search_donor(cls, search_term):
-        donor = cls.objects.filter(bloodg_type__icontains=search_term)
-        return business
+        donor = cls.objects.filter(blood_group__icontains=search_term)
+        return donor
     
     @classmethod
     def get_by_donor(cls, donors):
@@ -116,7 +116,7 @@ class Donor(models.Model):
         return donor
     
     def __str__(self):
-        return self.bloodg_type
+        return self.blood_group
     
     class Meta:
         ordering = ['-pub_date']
