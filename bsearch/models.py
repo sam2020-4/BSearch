@@ -54,7 +54,7 @@ class County(models.Model):
 # profile class
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    bio = models.TextField(blank=True)
+    bio = models.TextField(max_length=50)
     photo = CloudinaryField('profile_pics/', blank=True)
     county = models.ForeignKey(County,on_delete=models.CASCADE, blank=True, default='1')
 
@@ -74,53 +74,53 @@ class Profile(models.Model):
        
 class Donor(models.Model):
     name = models.CharField(max_length=255)
+    bloodg_type = models.CharField(max_length=20)
+    gender = models.CharField(max_length=20)
+    age = models.IntegerField(blank=True, null=True)
+    mobile_no = models.IntegerField(blank=True, null=True)
     email = models.EmailField()
     pub_date = models.DateTimeField(auto_now_add=True)
     Admin = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
-    admin_profile = models.ForeignKey(Profile,on_delete=models.CASCADE, blank=True, default='1')
-    address = models.TextField()
-    county = models.ForeignKey(County,on_delete=models.CASCADE, blank=True, default='1')
-    police_cont = models.CharField(max_length=255)
-    health_cont = models.CharField(max_length=255)
-
+    admin_profile = models.ForeignKey(Profile,on_delete=models.CASCADE, blank=True, default='1')    
+    county = models.ForeignKey(County,on_delete=models.CASCADE, blank=True, default='1')    
    
-    def save_business(self):
+    def save_donor(self):
         self.save()
     
-    def delete_business(self):
+    def delete_donor(self):
         self.delete()
         
     @classmethod
-    def get_allbusiness(cls):
+    def get_alldonor(cls):
         business = cls.objects.all()
+        return donor
+    
+    @classmethod
+    def search_donor(cls, search_term):
+        donor = cls.objects.filter(bloodg_type__icontains=search_term)
         return business
     
     @classmethod
-    def search_business(cls, search_term):
-        business = cls.objects.filter(name__icontains=search_term)
-        return business
+    def get_by_donor(cls, donors):
+        donor = cls.objects.filter(county__name__icontains=countys)
+        return donor
     
     @classmethod
-    def get_by_neighborhood(cls, neighborhoods):
-        business = cls.objects.filter(neighborhood__name__icontains=neighborhoods)
-        return business
-    
-    @classmethod
-    def get_businesses(request, id):
+    def get_donor(request, id):
         try:
-            business = Business.objects.get(pk = id)
+            donor = Donor.objects.get(pk = id)
             
         except ObjectDoesNotExist:
             raise Http404()
         
-        return business
+        return donor
     
     def __str__(self):
-        return self.name
+        return self.bloodg_type
     
     class Meta:
         ordering = ['-pub_date']
-        verbose_name = 'My Business'
-        verbose_name_plural = 'Business'
+        verbose_name = 'My Donor'
+        verbose_name_plural = 'Donor'
 
 
